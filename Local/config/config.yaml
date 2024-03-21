@@ -1,0 +1,12 @@
+candidate_prompts: ['a man in a well-tailored jean jacket with a sky background.']
+seed_range: 34,46
+result_path: "./result"
+cfgScale: 7.5
+height: 1152
+width: 768
+resize: False
+use_cuda: True
+modelId: "amazon.titan-image-generator-v1"
+target_region: "us-west-2"
+# wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P ./checkpoint
+checkpoint: "./checkpoint/sam_vit_h_4b8939.pth"
