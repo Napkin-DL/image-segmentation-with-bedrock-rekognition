@@ -20,21 +20,17 @@
 이 코드에는 `python>=3.8`과 `pytorch>=1.7` 및 `torchvision>=0.8`이 필요합니다. [여기](https://pytorch.org/get-started/locally/)의 안내에 따라 PyTorch와 TorchVision 관련 패키지를 설치하시면 됩니다. CPU 동작도 가능하지만 시간이 오래 걸리 수 있으므로 되도록 CUDA가 있는 ml.g4dn 또는 ml.g5 인스턴스를 사용할 것을 권장드립니다.
 
 
-1. segment-anything을 설치합니다.
-<br> 
+### 1. segment-anything 설치
 
 ```
 pip install -r requirements.txt 또는 git+https://github.com/facebookresearch/segment-anything.git
 ```
-<br> 
-2. checkpoint를 다운로드 받습니다. 
+### 2. checkpoint 다운로드 
  - 현재 위치 : ./image-segmentation-with-bedrock-rekognitions 아래에서,
-<br> 
-
+ 
 ```
 wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P checkpoint
 ```
-<br>  
 
  - 서로 다른 backbone 사이즈를 가진 3가지 버전의 모델을 사용할 수 있습니다. 
     - **`default` or `vit_h`: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth**
@@ -42,10 +38,11 @@ wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P che
     - `vit_b`: https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth
 
 
-3. 폴더 소개
+### 3. 폴더 소개
 
-- Local : python 함수로 간단하게 local 환경에서 수행해 볼 수 있는 python 파일 제공
-  - config/config.yaml 파일을 수정하여 다양한 시도를 할 수 있습니다.
+#### Local
+- python 함수로 간단하게 local 환경에서 수행해 볼 수 있는 python 파일을 제공합니다.
+- config/config.yaml 파일을 수정하여 다양한 시도를 할 수 있습니다.
     - candidate_prompts : 원하는 배경을 생성할 수 있는지 확인해 봅니다.
     - seed_range : 해당 범위 안에서 다양한 seed로 이미지를 생성해 봅니다.
     - result_path : 생성된 이미지가 저장되는 위치입니다.
@@ -57,8 +54,8 @@ wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P che
     - checkpoint : SAM 모델의 checkpoint이며, 2번에서 다운 받은 모델의 위치입니다.
     
 - 아래 코드를 수행하여 간단히 결과를 확인해 볼 수 있습니다.
-<br> 
-```python
+
+```
 python ./Local/segmentation_bedrock.py --config_file ./Local/config/config.yaml --target_label face --img_path ./test_images/andy_portrait_2.jpg
 ```
 
@@ -69,9 +66,10 @@ python ./Local/segmentation_bedrock.py --config_file ./Local/config/config.yaml 
 </p>
 
 <br> 
-- SageMaker
-  - 1. deploy_sam_on_sagemaker.ipynb : 아키텍처와 같이 SageMaker에서 Endpoint를 테스트하는 부분과 이를 실행하여 테스트하는 코드를 활용해 볼 수 있습니다.
-  - 2. load-testing.ipynb : Locust를 이용하여 stress 테스트를 통해 SageMaker의 autoscaling 등을 테스트해볼 수 있습니다.
+
+#### SageMaker
+- 1. deploy_sam_on_sagemaker.ipynb : 아키텍처와 같이 SageMaker에서 Endpoint를 테스트하는 부분과 이를 실행하여 테스트하는 코드를 활용해 볼 수 있습니다.
+- 2. load-testing.ipynb : Locust를 이용하여 stress 테스트를 통해 SageMaker의 autoscaling 등을 테스트해볼 수 있습니다.
 
 ## License
 
